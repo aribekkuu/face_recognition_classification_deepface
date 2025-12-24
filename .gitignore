@@ -1,0 +1,16 @@
+/venv
+
+.DS_Store
+
+IMG_4426.JPG
+
+/dataset/alibek
+/dataset/bakhyt
+/dataset/muslim
+/dataset/aya_shalkar
+
+/dataset/ds_model_arcface_detector_mtcnn_aligned_normalization_base_expand_0.pkl
+/dataset/ds_model_arcface_detector_retinaface_aligned_normalization_base_expand_0.pkl
+
+face_db.pkl
+
