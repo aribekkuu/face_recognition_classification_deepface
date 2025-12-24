@@ -8,7 +8,7 @@
 # if not os.path.exists(TEST_IMAGE):
 #     raise FileNotFoundError("test.jpg не найден")
 
-# print("🔍 Ищем лицо...")
+# print("🔍 Searching face")
 
 # result = DeepFace.find(
 #     img_path=TEST_IMAGE,
@@ -19,13 +19,13 @@
 # )
 
 # if len(result) == 0 or result[0].empty:
-#     print("❌ Лицо не найдено")
+#     print("❌ Face does not found in database")
 # else:
 #     identity = result[0].iloc[0]["identity"]
 #     name = identity.split("/")[-2]
 #     distance = result[0].iloc[0]["distance"]
 
-#     print(f"✅ Найден человек: {name}")
+#     print(f"✅ Found person: {name}")
 #     print(f"📏 Distance: {distance:.4f}")
 
 
@@ -39,7 +39,7 @@
 # MODEL = "ArcFace"
 # THRESHOLD = 0.45
 
-# print("📦 Загружаем базу лиц...")
+# print("📦 Uploading face database...")
 
 # database = []
 
@@ -67,9 +67,9 @@
 #         except Exception as e:
 #             print(f"⚠️ Пропущено: {img_path}")
 
-# print(f"✅ В базе: {len(database)} лиц")
+# print(f"✅ In database: {len(database)} лиц")
 
-# print("🔍 Проверяем тестовое фото...")
+# print("🔍 Checking test image")
 
 # test_emb = DeepFace.represent(
 #     img_path=TEST_IMAGE,
@@ -90,7 +90,7 @@
 # print(f"📏 Min distance: {best_distance:.4f}")
 
 # if best_distance < THRESHOLD:
-#     print(f"✅ Найден человек: {best_match}")
+#     print(f"✅ Found person: {best_match}")
 # else:
 #     print("❌ Unknown person")
 
@@ -124,7 +124,7 @@ for item in database:
 print(f"📏 Distance: {best_distance:.4f}")
 
 if best_distance < THRESHOLD:
-    print(f"✅ Найден человек: {best_match}")
+    print(f"✅ Found person: {best_match}")
 else:
     print("❌ Unknown person")
 
