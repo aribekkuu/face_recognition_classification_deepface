@@ -1,3 +1,40 @@
+from deepface import DeepFace
+import pickle
+from scipy.spatial.distance import cosine
+
+MODEL = "ArcFace"
+THRESHOLD = 0.45
+
+with open("face_db.pkl", "rb") as f:
+    database = pickle.load(f)
+
+test_emb = DeepFace.represent(
+    img_path="IMG_4426.JPG",
+    model_name=MODEL,
+    detector_backend="mtcnn",
+    enforce_detection=True
+)[0]["embedding"]
+
+best_match = None
+best_distance = 1.0
+
+for item in database:
+    dist = cosine(test_emb, item["embedding"])
+    if dist < best_distance:
+        best_distance = dist
+        best_match = item["name"]
+
+print(f"📏 Distance: {best_distance:.4f}")
+
+if best_distance < THRESHOLD:
+    print(f"✅ Found person: {best_match}")
+else:
+    print("❌ Unknown person")
+
+
+
+
+
 # from deepface import DeepFace
 # import cv2
 # import os
@@ -93,38 +130,3 @@
 #     print(f"✅ Found person: {best_match}")
 # else:
 #     print("❌ Unknown person")
-
-
-from deepface import DeepFace
-import pickle
-from scipy.spatial.distance import cosine
-
-MODEL = "ArcFace"
-THRESHOLD = 0.45
-
-with open("face_db.pkl", "rb") as f:
-    database = pickle.load(f)
-
-test_emb = DeepFace.represent(
-    img_path="IMG_4426.JPG",
-    model_name=MODEL,
-    detector_backend="mtcnn",
-    enforce_detection=True
-)[0]["embedding"]
-
-best_match = None
-best_distance = 1.0
-
-for item in database:
-    dist = cosine(test_emb, item["embedding"])
-    if dist < best_distance:
-        best_distance = dist
-        best_match = item["name"]
-
-print(f"📏 Distance: {best_distance:.4f}")
-
-if best_distance < THRESHOLD:
-    print(f"✅ Found person: {best_match}")
-else:
-    print("❌ Unknown person")
-
